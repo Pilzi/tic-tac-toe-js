@@ -12,7 +12,7 @@ function symbolProcess(hitboxName, listNum){
                 turn = couldWinnWays();
             
             case 2:
-                if (checkdoubleCombinations(1)){
+                if (checkdoubleCombinations(1, boardList)){
                     addSymbol("hitbox" + OWinnCombinations[0])
                     checkWinnDraw()
                     break;
@@ -22,7 +22,7 @@ function symbolProcess(hitboxName, listNum){
                 
 
             case 1:
-                if (checkdoubleCombinations(-1)){
+                if (checkdoubleCombinations(-1, boardList)){
                     addSymbol("hitbox" + XWinnCombinations[0])
                 }else{
                     while (!(boardList[turn] == 0) || turn == -1){
@@ -119,6 +119,8 @@ function getCombinationCount(symbol){
     countCombinations = [0,0,0,0,0,0,0,0,0]
     couldWinnCombinations = []
     bestWinncombinations = []
+    twoWaysToWinn = []
+    threeWaysToWinn = []
     winnCombinations.forEach(function(e, i){
         if ((boardList[e[0]] == symbol || boardList[e[0]] == 0) && (boardList[e[1]] == symbol || boardList[e[1]] == 0) && (boardList[e[2]] == symbol || boardList[e[2]] == 0)){
             if ((boardList[e[0]] == -1 || boardList[e[1]] == -1 || boardList[e[2]] == -1) || (turnCount == 0)){
@@ -130,6 +132,12 @@ function getCombinationCount(symbol){
 
         if (boardList[e] == 0){
             countCombinations[e] += 1
+            if (countCombinations[e] == 2){
+                twoWaysToWinn.push(e)
+            }
+            if (countCombinations[e] == 3){
+                threeWaysToWinn.push(e)
+            }
         }
         })
         console.log(countCombinations)
@@ -141,7 +149,11 @@ function couldWinnWays(){
     var biggestNum = 0;
 
     xCombinationCount.forEach(function(e, i){
-        if (e > biggestNum && boardList[i] == 0){
+        switch(e){
+            case 2:
+
+        }
+        if (e > biggestNum && boardList[i] == 0 && avoideToHelpEnemy(i, 1)){
             bestTurn = i;
             biggestNum = e
         }
@@ -154,7 +166,21 @@ function couldWinnWays(){
 }
 
 
-function checkdoubleCombinations(symbol){
+function avoideToHelpEnemy(i, symbol){
+    var copyBoard = JSON.parse(JSON.stringify(boardList))
+    copyBoard[i] = symbol
+    if (checkdoubleCombinations(1, copyBoard)){
+        copyBoard[OWinnCombinations[0]] = -1
+    if (checkdoubleCombinations(-1, copyBoard)){
+        return false
+    }}
+    return true
+    
+
+}
+
+
+function checkdoubleCombinations(symbol, board){
     returnValue = false;
     XWinnCombinations = [];
     OWinnCombinations = [];
@@ -162,11 +188,11 @@ function checkdoubleCombinations(symbol){
         e.forEach(function(elem, iter){
             let result = 0;
             for (var count = 0; count < elem.length; count++){
-                if (boardList[elem[count]] == symbol){
+                if (board[elem[count]] == symbol){
                     result++
                     }
                 
-                if (result == elem.length && boardList[i] == 0){
+                if (result == elem.length && board[i] == 0){
                         switch(symbol){
                             case -1:
                                 XWinnCombinations.push(i)
@@ -287,6 +313,7 @@ function removeBlur(dif){
     
     
 }
+
 
 
 
