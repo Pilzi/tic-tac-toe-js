@@ -144,18 +144,17 @@ function getCombinationCount(symbol){
     return countCombinations
 }
 function couldWinnWays(){
-    xCombinationCount = getCombinationCount(-1)
-    xCombinationCount.push(getCombinationCount(1))
+    var CombinationCount = getCombinationCount(-1)
     var biggestNum = 0;
 
-    xCombinationCount.forEach(function(e, i){
-        switch(e){
-            case 2:
-
-        }
-        if (e > biggestNum && boardList[i] == 0 && avoideToHelpEnemy(i, 1)){
-            bestTurn = i;
-            biggestNum = e
+    CombinationCount.forEach(function(e, i){
+        if (avoideToHelpEnemy(i, 1)){
+            if (e > biggestNum && boardList[i] == 0){
+                if (avoideToHelpEnemy(i, 1)){
+                bestTurn = i;
+                biggestNum = e
+                }
+            }
         }
         
         
@@ -168,12 +167,14 @@ function couldWinnWays(){
 
 function avoideToHelpEnemy(i, symbol){
     var copyBoard = JSON.parse(JSON.stringify(boardList))
-    copyBoard[i] = symbol
+    console.log("copyboard: " + copyBoard)
+    copyBoard[i] = 1
     if (checkdoubleCombinations(1, copyBoard)){
         copyBoard[OWinnCombinations[0]] = -1
-    if (checkdoubleCombinations(-1, copyBoard)){
-        return false
-    }}
+        if (checkdoubleCombinations(-1, copyBoard) && XWinnCombinations.length == 2){
+            return false
+        }
+    }
     return true
     
 
@@ -313,7 +314,6 @@ function removeBlur(dif){
     
     
 }
-
 
 
 
