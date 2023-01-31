@@ -11,15 +11,17 @@
 <body>
     <div id="blur"></div>
     <div id="difficultySelection">
-        <button class="bts" id="noAiButton" type="button" onclick="removeBlur(0)">1vs1</button>
-        <button class="bts" id="normalButton" type="button" onclick="removeBlur(1)">normal</button>
+        <div>
+            <button class="bts" id="noAiButton" type="button" onclick="removeBlur(0)">1vs1</button>
+            <button class="bts" id="normalButton" type="button" onclick="removeBlur(1)">normal</button>
+         </div>
         <button class="bts" id="hardButton" type="button" onclick="removeBlur(2)">hard</button>
         <button class="bts" id="impossibleButton" type="button" onclick="removeBlur(3)">impossible</button>
     </div>
     <h1 id="drawMessage">draw</h1>
-    <div id="line"></div>
-    <img id="gameBoard" src="assets\game board.png" draggable="false" >
     <div id="game" draggable="false" >
+        <img id="gameBoard" src="assets\game board.png" draggable="false" ></img>
+        <div id="line"></div>
         <div class="rowCombinations">
             <div class="hitbox" id="hitbox0" onclick="symbolProcess(this.id,0)"></div>
             <div class="hitbox" id="hitbox1" onclick="symbolProcess(this.id,1)"></div>
