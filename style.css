@@ -1,10 +1,10 @@
 html, body{
     background: #212121;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    overflow: hidden;
     height: 100%;
     width: 100%;
     position: absolute;
+    margin: 0;
     
 }
 
@@ -21,8 +21,10 @@ html, body{
 
 
 #game{
-    margin-left: 35%;
-    margin-top: 14%;
+    top: 50%;
+    left: 50%;
+    margin-left: -300px;
+    margin-top: -280px;
     width: 800px;
     pointer-events: none;
     user-select: none;
@@ -63,20 +65,27 @@ html, body{
 }
 
 
-#winnline{
-    width: 830px;
+#winnLine{
+    width: 700px;
     pointer-events: none;
     filter: opacity(70%);
+    top: 50%;
+    left: 50%;
+    margin-left: -270px;
+    margin-top: -450px;
 }
 
 
 #drawMessage{
-    font-size: 7vw;
+    font-size: 150px;
     color: rgb(232, 232, 8);
-    margin-left: 41%;
-    margin-top: -9%;
+    left: 50%;
+    top: 50%;
+    margin-top: -500px;
+    margin-left: -180px;
     position: absolute;
     user-select: none;
+    opacity: 0;
 }
 
 
@@ -151,7 +160,7 @@ html, body{
         position: absolute;
         top: 50%;
         left: 50%;
-        margin-top: -300px;
+        margin-top: -250px;
         margin-left: -200px;
     }
     
@@ -159,21 +168,34 @@ html, body{
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: -300px;
+    margin-top: -230px;
     margin-left: -200px;
     width: 1000px;
     }
 
     .hitbox{
-        width: 118px;
-        height: 118px;
+        width: 112px;
+        height: 112px;
     }
     #gameBoard{
         width: 850px;
         height: 850px;
-        margin-left: -19%;
-        margin-top: -20%;
+        margin-left: -20%;
+        margin-top: -21%;
         
+    }
+    #drawMessage{
+        font-size: 120px;
+        margin-left: -150px;
+        margin-top: -400px;
+    
+        
+    }
+    #winnLine{
+        width: 500px;
+        margin-left: -200px;
+        margin-top: -310px;
+
     }
 }
 
