@@ -90,7 +90,7 @@ async function finishGame(){
 
 function checkWinnDraw(){
     if (winnCheck("bool")){
-        finishGame();
+        finishGame("hitbox");
      }else if(drawCheck()){
         drawAnimation();
         finishGame();
@@ -238,11 +238,11 @@ function drawCheck(){
 
 function drawAnimation(){
     var drawMessage = document.getElementById("drawMessage");
-    var marginTop = -9
+    var opacity = 0
     var interval = setInterval(function(){
-        if (marginTop < 3){
-            drawMessage.style.marginTop = marginTop + "%"
-            marginTop += 0.1
+        if (opacity < 1){
+            drawMessage.style.opacity = opacity 
+            opacity += 0.01
             
         }else{
             clearInterval(interval)
@@ -283,16 +283,30 @@ function markCombination(i){
 }
 
 
-function magicLine(ml, mt, rt){
+
+function magicLine(i,e,r){
+    var degArr = [0,-42,0,45,3,45,0,-42,0]
+    if (winnCombinations[winnCheck("i")][1] == 4){
+        switch(winnCombinations[winnCheck("i")][0]){
+            case 1:
+                degArr[4] += 45
+                break;
+            case 2:
+                degArr[4] += 90
+                break;
+            case 3: 
+                degArr[4] += 135
+                break;
+                
+        }
+    }
+    var rt = degArr[winnCombinations[winnCheck("i")][1]] + "deg"
     winnline = document.createElement("img")
     winnline.src = "assets\\ttt-winnline.png"
-    winnline.style.marginLeft = ml
-    winnline.style.marginTop = mt
     winnline.style.transform = "rotate("+rt+")"
-    winnline.id = "winnline"
-    r = document.getElementById("line")
-    r.appendChild(winnline)
-    
+    winnline.id = "winnLine"
+    var hitbox = document.getElementById("hitbox" + winnCombinations[winnCheck("i")][1])
+    hitbox.appendChild(winnline)
 }
 
 
@@ -314,7 +328,3 @@ function removeBlur(dif){
     
     
 }
-
-
-
-
